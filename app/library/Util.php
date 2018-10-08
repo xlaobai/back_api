@@ -56,4 +56,23 @@ class Util
         return $jsonData;
     }
 
+    /**
+     * token验证
+     *
+     * @param int $id 用户id
+     * @param string $token Api验签
+     *
+     * @return boolean
+     */
+
+    public static function checkToken($id, $token) {
+        $cache = Cache::init('redis');
+        $res = $cache -> get($id);
+        if($res == $token) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

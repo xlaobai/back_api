@@ -4,10 +4,10 @@ namespace mod;
 
 class Admin
 {
-    public static function findAdmin($cond = [])
+    public static function findAdmins($columes = '*' , $cond = [])
     {
         $db = \lib\DB::init();
-        $admin = $db -> select('admin', '*', $cond);
+        $admin = $db -> select('admin', $columes, $cond);
 
         return $admin;
     }
@@ -27,8 +27,26 @@ class Admin
         }
     }
 
-    public static function editAdmin()
+    public static function addAdmin($params)
     {
+        $db = \lib\DB::init();
+        $db -> insert("admin", $params);
+        return $db -> id();
+    }
 
+    public static function editAdmin($params) {
+        $id = [
+            'id' => (string) $params['id']
+        ];
+        unset($params['id']);
+        $db = \lib\DB::init();
+        $db -> update('admin', $params, $id);
+        return $db -> rowCount();
+    }
+
+    public static function delAdmin($id) {
+        $db = \lib\DB::init();
+        $rs = $db -> delete('admin', array('id' => $id));
+        return $rs ? $rs->rowCount() : false;
     }
 }

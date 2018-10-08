@@ -11,10 +11,10 @@
 
 Flight::route('GET /', ['\ctl\index', 'index']);
 Flight::route('POST /api/login', ['\ctl\Admin', 'login']);
-Flight::route('GET /share.html', ['\ctl\share', 'index']);
-Flight::route('GET /list.html', ['\ctl\lists', 'index']);
-Flight::route('GET /info.html', ['\ctl\info', 'index']);
-Flight::route('GET /gbook.html', ['\ctl\gbook', 'index']);
+Flight::route('GET /api/admin/lst', ['\ctl\Admin', 'lst']);
+Flight::route('POST /api/admin/add', ['\ctl\Admin', 'add']);
+Flight::route('POST /api/admin/edit', ['\ctl\Admin', 'edit']);
+Flight::route('GET /api/admin/del', ['\ctl\Admin', 'del']);
 
 /* 路由前置处理 */
 Flight::before('start',function(&$params, &$output){
@@ -22,6 +22,9 @@ Flight::before('start',function(&$params, &$output){
     header('Access-Control-Allow-Origin: *');
     header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
     header('Access-Control-Allow-Methods: GET, POST, PUT');
+});
+
+Flight::after('start', function (){
 });
 
 //异常处理

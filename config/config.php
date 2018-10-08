@@ -26,7 +26,7 @@ return [
     'db'    =>  [
         'database_type'     => 'mysql',
         'server'            => '127.0.0.1',
-        'database_name'     => 'php5',
+        'database_name'     => 'php_test',
         'username'          => 'root',
         'password'          => 'Lsx960202',
         'charset'           => 'utf8mb4',
