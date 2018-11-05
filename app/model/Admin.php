@@ -4,7 +4,7 @@ namespace mod;
 
 class Admin
 {
-    public static function findAdmins($columes = '*' , $cond = [])
+    public static function findAdmin($columes = '*' , $cond = [])
     {
         $db = \lib\DB::init();
         $admin = $db -> select('admin', $columes, $cond);
@@ -14,7 +14,7 @@ class Admin
 
     public static function checkAdmin( $data = [] )
     {
-        $admin = self::findAdmin([ "username" => $data['admin']]);
+        $admin = self::findAdmin( '*',[ "username" => $data['admin']]);
 
         if( sizeof($admin) == 0 )
         {
@@ -40,8 +40,8 @@ class Admin
         ];
         unset($params['id']);
         $db = \lib\DB::init();
-        $db -> update('admin', $params, $id);
-        return $db -> rowCount();
+        $data = $db -> update('admin', $params, $id);
+        return $data ? $data -> rowCount() : false;
     }
 
     public static function delAdmin($id) {

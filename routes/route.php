@@ -15,6 +15,16 @@ Flight::route('GET /api/admin/lst', ['\ctl\Admin', 'lst']);
 Flight::route('POST /api/admin/add', ['\ctl\Admin', 'add']);
 Flight::route('POST /api/admin/edit', ['\ctl\Admin', 'edit']);
 Flight::route('GET /api/admin/del', ['\ctl\Admin', 'del']);
+Flight::route('GET /api/cate/lst', ['\ctl\cate', 'lst']);
+Flight::route('POST /api/cate/add', ['\ctl\cate', 'add']);
+Flight::route('POST /api/cate/edit', ['\ctl\cate', 'edit']);
+Flight::route('GET /api/cate/del', ['\ctl\cate', 'del']);
+Flight::route('GET /api/art/lst', ['\ctl\article', 'lst']);
+Flight::route('POST /api/art/add', ['\ctl\article', 'add']);
+Flight::route('POST /api/art/edit', ['\ctl\article', 'edit']);
+Flight::route('GET /api/art/del', ['\ctl\article', 'del']);
+Flight::route('POST /api/upload/file', ['\ctl\article', 'upload']);
+
 
 /* 路由前置处理 */
 Flight::before('start',function(&$params, &$output){
@@ -22,6 +32,22 @@ Flight::before('start',function(&$params, &$output){
     header('Access-Control-Allow-Origin: *');
     header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
     header('Access-Control-Allow-Methods: GET, POST, PUT');
+
+    /* 用户TOKEN验证*/
+    $req = \Flight::request();
+    if( $req -> url == '/api/login' ) {
+        return false;
+    }
+
+    if( $req -> query['user_id'] && $req -> query['token'] ) {
+        $checkAuth = \lib\Util::checkToken($req -> query['user_id'], $req -> query['token']);
+
+        if($checkAuth) {
+            return false;
+        }
+    }
+
+    exit(\Flight::json(\lib\Util::apiRes(0, 'TOKENERROR')));
 });
 
 Flight::after('start', function (){

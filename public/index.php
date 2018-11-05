@@ -31,4 +31,3 @@ require '../routes/route.php';
 
 //框架启动
 Flight::start();
-

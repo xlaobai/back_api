@@ -47,9 +47,9 @@ return [
             'port'          =>  6379,
         ],
         'url'   =>  [
-            'site'      =>  'http://test.xtlqhb.com',
-            'static'    =>  'http://test.xtlqhb.com',
-            'cookie'    =>  'http://test.xtlqhb.com',
+            'site'      =>  'http://demo.fightphp.com',
+            'static'    =>  'http://demo.fightphp.com',
+            'cookie'    =>  'http://demo.fightphp.com',
         ]
     ]
 ];

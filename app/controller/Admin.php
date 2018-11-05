@@ -26,9 +26,10 @@ class Admin
         if($adminId > 0)
         {
             //生成token并存储
-            $token = md5("$adminId");
+            $timestamp = time();
+            $token = md5("$adminId" . "$timestamp");
             $cache = \lib\Cache::init('redis');
-            $cache -> set("$adminId", $token ,60*10);
+            $cache -> set("$adminId", $token );   //暂时不设置时间
             return \Flight::json(\lib\Util::apiRes(1,array(
                 'id' => $adminId,
                 'token' => $token
@@ -43,12 +44,8 @@ class Admin
     public static function lst() {
         $req = \Flight::request();
 
-        if(true){
-            $res = \mod\Admin::findAdmins(array('id', 'username', 'address'));
+            $res = \mod\Admin::findAdmin(array('id', 'username', 'address'));
             return \Flight::json(\lib\Util::apiRes('1',$res));
-        } else {
-            return \Flight::json(\lib\Util::apiRes('0','TOKENERROR'));
-        }
 
     }
 
@@ -70,7 +67,7 @@ class Admin
             'username' => $username
         ];
 
-        $back = \mod\Admin::findAdmins('id', $admin);
+        $back = \mod\Admin::findAdmin('id', $admin);
 
         if( sizeof($back) > 0 ) {
             return \Flight::json(\lib\Util::apiRes('0', 'USERREPE'));
@@ -82,16 +79,12 @@ class Admin
             'password' => md5($password),
             'logintime' => time()
         ];
+        $res = \mod\Admin::addAdmin($data);
 
-        if(true) {
-            $res = \mod\Admin::addAdmin($data);
-
-            if( isset($res) ) {
-                return \Flight::json(\lib\Util::apiRes('1', []));
-            } else {
-                return \Flight::json(\lib\Util::apiRes('0', 'ADDERROR'));
-            }
-
+        if( isset($res) ) {
+            return \Flight::json(\lib\Util::apiRes('1', []));
+        } else {
+            return \Flight::json(\lib\Util::apiRes('0', 'ADDERROR'));
         }
     }
 
