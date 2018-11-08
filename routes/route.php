@@ -35,12 +35,12 @@ Flight::before('start',function(&$params, &$output){
 
     /* 用户TOKEN验证*/
     $req = \Flight::request();
-    if( $req -> url == '/api/login' ) {
+    if( $req -> url == '/api/login' ) {         // 初始登录方法无需验证
         return false;
     }
 
-    if( $req -> query['user_id'] && $req -> query['token'] ) {
-        $checkAuth = \lib\Util::checkToken($req -> query['user_id'], $req -> query['token']);
+    if( $req -> query['user_id'] && $req -> query['token'] ) {              //这里只是使用token进行登录时效的验证
+        $checkAuth = \lib\Util::checkToken($req -> query['user_id'], $req -> query['token']);           //自定义验证方法
 
         if($checkAuth) {
             return false;
