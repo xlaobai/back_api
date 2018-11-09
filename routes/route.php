@@ -9,7 +9,6 @@
 
 /* 路由开始 */
 
-Flight::route('GET /', ['\ctl\index', 'index']);
 Flight::route('POST /api/login', ['\ctl\Admin', 'login']);
 Flight::route('GET /api/admin/lst', ['\ctl\Admin', 'lst']);
 Flight::route('POST /api/admin/add', ['\ctl\Admin', 'add']);
