@@ -43,14 +43,19 @@ class Admin
 
     public static function lst() {
         $req = \Flight::request();
-
-            $res = \mod\Admin::findAdmin(array('id', 'username', 'address'));
-            return \Flight::json(\lib\Util::apiRes('1',$res));
+        if( isset($req->query['auto']) ) {
+            return \Flight::json(\lib\Util::apiRes(0,'AUTO_ERROR'));
+        }
+        $res = \mod\Admin::findAdmin(array('id', 'username', 'address'));
+        return \Flight::json(\lib\Util::apiRes(1,$res));
 
     }
 
     public static  function add() {
         $req = \Flight::request();
+        if( isset($req->query['auto']) ) {
+            return \Flight::json(\lib\Util::apiRes(0,'AUTO_ERROR'));
+        }
         $username = isset( $req -> data['username']) ? addslashes(trim($req -> data['username'])) : '';
         $address = isset( $req -> data['address'])? addslashes(trim($req -> data['address'])) : '';
         $password = isset( $req -> data['password']) ? (int) $req -> data['password'] : '';
@@ -90,7 +95,9 @@ class Admin
 
     public static  function edit() {
         $req = \Flight::request();
-
+        if( isset($req->query['auto']) ) {
+            return \Flight::json(\lib\Util::apiRes(0,'AUTO_ERROR'));
+        }
         $id = isset( $req -> data['id'] ) ? (int) $req -> data['id'] : '';
         $username = isset( $req -> data['username'] )? addslashes(trim( $req -> data['username'])) : '';
         $address = isset( $req -> data['address'] )? addslashes(trim( $req -> data['address'])) : '';
@@ -124,6 +131,9 @@ class Admin
 
     public static  function del() {
         $req = \Flight::request();
+        if( isset($req->query['auto']) ) {
+            return \Flight::json(\lib\Util::apiRes(0,'AUTO_ERROR'));
+        }
         $id = isset( $req -> query['id'] ) ? (int) $req -> query['id'] : '';
 
         $res = \mod\Admin::delAdmin($id);

@@ -47,7 +47,7 @@ Flight::before('start',function(&$params, &$output){
         }
     }
 
-    exit(\Flight::json(\lib\Util::apiRes(0, 'TOKENERROR')));
+    $req -> query['auto'] = false;
 });
 
 Flight::after('start', function (){

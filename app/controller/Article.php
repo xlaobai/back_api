@@ -6,7 +6,9 @@ class Article
 {
     public static function lst() {
         $req = \Flight::request();
-
+        if( isset($req->query['auto']) ) {
+            return \Flight::json(\lib\Util::apiRes(0,'AUTO_ERROR'));
+        }
         $res = \mod\Article::findArt();
         return \Flight::json(\lib\Util::apiRes('1',$res));
 
@@ -14,6 +16,9 @@ class Article
 
     public static  function add() {
         $req = \Flight::request();
+        if( isset($req->query['auto']) ) {
+            return \Flight::json(\lib\Util::apiRes(0,'AUTO_ERROR'));
+        }
         $cateid = isset( $req -> data['cateid'] ) ? (int) $req -> data['cateid'] : 0 ;
         if(!$cateid){
             return \Flight::json(\lib\Util::apiRes('0','CATERROR'));
@@ -58,6 +63,9 @@ class Article
 
     public static  function edit() {
         $req = \Flight::request();
+        if( isset($req->query['auto']) ) {
+            return \Flight::json(\lib\Util::apiRes(0,'AUTO_ERROR'));
+        }
         $id = isset( $req -> data['id'] ) ? (int) $req -> data['id'] : '';
         $cateid = isset( $req -> data['cateid'] ) ? (int) $req -> data['cateid'] : 0 ;
 
@@ -111,6 +119,9 @@ class Article
 
     public static  function del() {
         $req = \Flight::request();
+        if( isset($req->query['auto']) ) {
+            return \Flight::json(\lib\Util::apiRes(0,'AUTO_ERROR'));
+        }
         $id = isset( $req -> query['id'] ) ? (int) $req -> query['id'] : '';
 
         $res = \mod\Article::delArt($id);
@@ -123,6 +134,9 @@ class Article
 
     public static function upload() {
         $req = \Flight::request();
+        if( isset($req->query['auto']) ) {
+            return \Flight::json(\lib\Util::apiRes(0,'AUTO_ERROR'));
+        }
         $pic = $req -> files['pic'];
         if( isset($pic) ) {
             $dateFile = date("Ymd");

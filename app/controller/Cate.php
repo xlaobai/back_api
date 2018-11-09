@@ -6,7 +6,9 @@ class Cate
 {
     public static function lst() {
         $req = \Flight::request();
-
+        if( isset($req->query['auto']) ) {
+            return \Flight::json(\lib\Util::apiRes(0,'AUTO_ERROR'));
+        }
         $res = \mod\Cate::findCate(array('id', 'catename'));
         return \Flight::json(\lib\Util::apiRes('1',$res));
 
@@ -14,6 +16,9 @@ class Cate
 
     public static  function add() {
         $req = \Flight::request();
+        if( isset($req->query['auto']) ) {
+            return \Flight::json(\lib\Util::apiRes(0,'AUTO_ERROR'));
+        }
         $catename = isset( $req -> data['catename']) ? addslashes(trim($req -> data['catename'])) : '';;
 
         if(!$catename){
@@ -45,7 +50,9 @@ class Cate
 
     public static  function edit() {
         $req = \Flight::request();
-
+        if( isset($req->query['auto']) ) {
+            return \Flight::json(\lib\Util::apiRes(0,'AUTO_ERROR'));
+        }
         $id = isset( $req -> data['id'] ) ? (int) $req -> data['id'] : '';
         $catename = isset( $req -> data['catename'] )? addslashes(trim( $req -> data['catename'])) : '';
 
@@ -72,6 +79,9 @@ class Cate
 
     public static  function del() {
         $req = \Flight::request();
+        if( isset($req->query['auto']) ) {
+            return \Flight::json(\lib\Util::apiRes(0,'AUTO_ERROR'));
+        }
         $id = isset( $req -> query['id'] ) ? (int) $req -> query['id'] : '';
 
         $res = \mod\Cate::delCate($id);
