@@ -9,7 +9,11 @@ class Cate
         if( isset($req->query['auto']) ) {
             return \Flight::json(\lib\Util::apiRes(0,'AUTO_ERROR'));
         }
-        $res = \mod\Cate::findCate(array('id', 'catename'));
+        $data = [];
+        if( isset($req -> query['id']) ) {
+            $data['id'] = $req -> query['id'];
+        }
+        $res = \mod\Cate::findCate(array('id', 'catename'), $data);
         return \Flight::json(\lib\Util::apiRes('1',$res));
 
     }

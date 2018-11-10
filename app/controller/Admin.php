@@ -46,7 +46,11 @@ class Admin
         if( isset($req->query['auto']) ) {
             return \Flight::json(\lib\Util::apiRes(0,'AUTO_ERROR'));
         }
-        $res = \mod\Admin::findAdmin(array('id', 'username', 'address'));
+        $data = [];
+        if( isset($req -> query['id']) ) {
+            $data['id'] = $req -> query['id'];
+        }
+        $res = \mod\Admin::findAdmin(array('id', 'username', 'address'), $data);
         return \Flight::json(\lib\Util::apiRes(1,$res));
 
     }
