@@ -50,7 +50,7 @@ class Admin
         if( isset($req -> query['id']) ) {
             $data['id'] = $req -> query['id'];
         }
-        $res = \mod\Admin::findAdmin(array('id', 'username', 'address'), $data);
+        $res = \mod\Admin::findAdmin(array('id', 'username', 'address', 'logintime'), $data);
         return \Flight::json(\lib\Util::apiRes(1,$res));
 
     }
