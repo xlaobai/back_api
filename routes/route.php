@@ -14,15 +14,15 @@ Flight::route('GET /api/admin/lst', ['\ctl\Admin', 'lst']);
 Flight::route('POST /api/admin/add', ['\ctl\Admin', 'add']);
 Flight::route('POST /api/admin/edit', ['\ctl\Admin', 'edit']);
 Flight::route('GET /api/admin/del', ['\ctl\Admin', 'del']);
-Flight::route('GET /api/cate/lst', ['\ctl\cate', 'lst']);
-Flight::route('POST /api/cate/add', ['\ctl\cate', 'add']);
-Flight::route('POST /api/cate/edit', ['\ctl\cate', 'edit']);
-Flight::route('GET /api/cate/del', ['\ctl\cate', 'del']);
-Flight::route('GET /api/art/lst', ['\ctl\article', 'lst']);
-Flight::route('POST /api/art/add', ['\ctl\article', 'add']);
-Flight::route('POST /api/art/edit', ['\ctl\article', 'edit']);
-Flight::route('GET /api/art/del', ['\ctl\article', 'del']);
-Flight::route('POST /api/upload/file', ['\ctl\article', 'upload']);
+Flight::route('GET /api/cate/lst', ['\ctl\Cate', 'lst']);
+Flight::route('POST /api/cate/add', ['\ctl\Cate', 'add']);
+Flight::route('POST /api/cate/edit', ['\ctl\Cate', 'edit']);
+Flight::route('GET /api/cate/del', ['\ctl\Cate', 'del']);
+Flight::route('GET /api/art/lst', ['\ctl\Article', 'lst']);
+Flight::route('POST /api/art/add', ['\ctl\Article', 'add']);
+Flight::route('POST /api/art/edit', ['\ctl\Article', 'edit']);
+Flight::route('GET /api/art/del', ['\ctl\Article', 'del']);
+Flight::route('POST /api/upload/file', ['\ctl\Article', 'upload']);
 
 
 /* 路由前置处理 */
