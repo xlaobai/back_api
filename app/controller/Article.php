@@ -11,9 +11,28 @@ class Article
         }
         $data = [];
         if( isset($req -> query['id']) ) {
-            $data['id'] = $req -> query['id'];
+            $data['article.id'] = $req -> query['id'];
         }
-        $res = \mod\Article::findArt('*', $data);
+        $res = \mod\Article::findArt(
+            [
+            "article.id",
+            "article.title",
+            "article.desc",
+            "article.keywords",
+            "article.content",
+            "article.author",
+            "article.time",
+            "article.click",
+            "article.pic",
+            "article.state",
+            "article.cateid",
+            "cate.catename"
+            ],
+            $data,
+            [
+            "[>]cate" => ["cateid" => "id"]
+            ]
+        );
         return \Flight::json(\lib\Util::apiRes('1',$res));
 
     }

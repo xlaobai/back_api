@@ -4,10 +4,14 @@ namespace mod;
 
 class Article
 {
-    public static function findArt($columes = '*' , $cond = [])
+    public static function findArt($columes = '*' , $cond = [], $tables = [])
     {
         $db = \lib\DB::init();
-        $art = $db -> select('article', $columes, $cond);
+        if( sizeof($tables) > 0 ) {
+            $art = $db -> select('article', $tables, $columes, $cond);
+        } else {
+            $art = $db -> select('article', $columes, $cond);
+        }
 
         return $art;
     }
